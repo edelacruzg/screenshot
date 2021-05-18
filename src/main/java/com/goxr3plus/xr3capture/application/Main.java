@@ -11,12 +11,12 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 	
-	public static void main(final String[] args) {
+	public static void main(String[] args) {
 		launch(args);
 	}
 	
 	@Override
-	public void start(final Stage primaryStage) throws Exception {
-		new CaptureWindow().getStage().show();
+	public void start(Stage primaryStage) throws Exception {
+		new CaptureWindow().stage.show();
 	}
 }

@@ -1,7 +1,7 @@
 /*
  * 
  */
-package main.java.com.goxr3plus.xr3capture.utils;
+package main.java.com.goxr3plus.xr3capture.tools;
 
 /**
  * The type of the notification to be shown.

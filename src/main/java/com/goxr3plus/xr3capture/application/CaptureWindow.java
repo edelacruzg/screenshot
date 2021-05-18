@@ -6,15 +6,19 @@ package main.java.com.goxr3plus.xr3capture.application;
 import java.util.concurrent.CountDownLatch;
 
 import javafx.application.Platform;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.NodeOrientation;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javax.swing.JOptionPane;
 import main.java.com.goxr3plus.xr3capture.controllers.CaptureWindowController;
-import main.java.com.goxr3plus.xr3capture.controllers.WindowController;
+import main.java.com.goxr3plus.xr3capture.controllers.MainWindowController;
 import main.java.com.goxr3plus.xr3capture.controllers.SettingsWindowController;
 
 /**
@@ -28,10 +32,10 @@ public class CaptureWindow {
 	private Thread positionFixerThread;
 	
 	/** The stage. */
-	private Stage stage;
+	public static Stage stage = new Stage();
 	
 	/** The main window controller. */
-	public WindowController mainWindowController;
+	public MainWindowController mainWindowController;
 	
 	/** The Capture Window of the application. */
 	public CaptureWindowController captureWindowController;
@@ -48,28 +52,27 @@ public class CaptureWindow {
 	public CaptureWindow() {
 		
 		try {
-			 
+			
 			// stage
-			stage = new Stage();
-			stage.setTitle("XR3Capture");
-			//stage.getIcons().add(new Image(getClass().getResourceAsStream("/image/icon.png")))
+			stage.setTitle("XR3Capture Version 9!");
+			stage.getIcons().add(new Image(getClass().getResourceAsStream("/image/icon.png")));
 			stage.initStyle(StageStyle.TRANSPARENT);
 			stage.setAlwaysOnTop(true);
 			
 			// MainWindowController
-			//FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/fxml/xr3capture/MainWindowController.fxml"))
-			//loader1.load()
-			mainWindowController = new WindowController(stage);
+			FXMLLoader loader1 = new FXMLLoader(getClass().getResource("/fxml/MainWindowController.fxml"));
+			loader1.load();
+			mainWindowController = loader1.getController();
 			
 			// CaptureWindowController
-			//FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/fxml/xr3capture/CaptureWindowController.fxml"))
-			//	loader2.load()
-			captureWindowController = new CaptureWindowController(stage);
+			FXMLLoader loader2 = new FXMLLoader(getClass().getResource("/fxml/CaptureWindowController.fxml"));
+			loader2.load();
+			captureWindowController = loader2.getController();
 			
 			// SettingsController
-			//	FXMLLoader loader3 = new FXMLLoader(getClass().getResource("/fxml/xr3capture/SettingsWindowController.fxml"))
-			//	loader3.load()
-			settingsWindowController = new SettingsWindowController();
+			FXMLLoader loader3 = new FXMLLoader(getClass().getResource("/fxml/SettingsWindowController.fxml"));
+			loader3.load();
+			settingsWindowController = loader3.getController();
 			
 			// Add References between controllers
 			mainWindowController.addControllerReferences(captureWindowController, settingsWindowController);
@@ -78,15 +81,16 @@ public class CaptureWindow {
 			
 			// Load the dataBase
 			//DataBase.loadDataBaseSettings(settingsWindowController)
-			
+
+                        
 			// Finally
-			stage.setScene(new Scene(mainWindowController, Color.TRANSPARENT));
+			stage.setScene(new Scene(loader1.getRoot(), Color.TRANSPARENT));
 			//stage.show()
 			
 			stage.setOnShown(s -> startPositionFixThread());
 			stage.setOnHidden(h -> stopPositionFixThread());
 			
-		} catch (final Exception ex) {
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 		
@@ -111,10 +115,10 @@ public class CaptureWindow {
 				while (true) {
 					
 					// CountDownLatch
-					final CountDownLatch count = new CountDownLatch(1);
+					CountDownLatch count = new CountDownLatch(1);
 					
 					// Get VisualBounds of the Primary Screen
-					final Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
+					Rectangle2D bounds = Screen.getPrimary().getVisualBounds();
 					Platform.runLater(() -> {
 						
 						//Fix the window position
@@ -129,7 +133,7 @@ public class CaptureWindow {
 					Thread.sleep(500);
 					
 				}
-			} catch (@SuppressWarnings("unused") final InterruptedException ex) {
+			} catch (@SuppressWarnings("unused") InterruptedException ex) {
 				positionFixerThread.interrupt();
 				//fuck dis error it is not fatal
 				//Logger.getLogger(CaptureWindow.class.getName()).log(Level.WARNING, null, ex)
@@ -148,13 +152,6 @@ public class CaptureWindow {
 	private void stopPositionFixThread() {
 		if (positionFixerThread != null && positionFixerThread.isAlive())
 			positionFixerThread.interrupt();
-	}
-	
-	/**
-	 * @return the stage
-	 */
-	public Stage getStage() {
-		return stage;
 	}
 	
 }

@@ -46,12 +46,3 @@ Network Trash Folder
 Temporary Items
 .apdisk
 /target/
-
-bin/
-
-
-# Eclipse Files
-.classpath
-.project
-spartanizer.xml
-.settings
