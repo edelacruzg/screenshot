@@ -43,31 +43,118 @@
          </top>
          <center>
             <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+                <children>
+                    <HBox alignment="CENTER">
+                        <ImageView fx:id="fotosCliente" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="https://www.tooltyp.com/wp-content/uploads/2014/10/1900x920-8-beneficios-de-usar-imagenes-en-nuestros-sitios-web.jpg" />
+                            </image>
+                        </ImageView>
+                    </HBox>
+                </children>
+                <children>
+                    <HBox alignment="CENTER">
+                         <JFXButton fx:id="botonAnterior" focusTraversable="false" ripplerFill="#eaf213" text="Anterior" textFill="#faac05"></JFXButton>
+                         <JFXButton fx:id="botonSiguiente" focusTraversable="false" ripplerFill="#eaf213" text="Siguiente" textFill="#faac05"></JFXButton>
+                    </HBox>
+                    
+                </children>
                <children>
                   <JFXSlider fx:id="timeSlider" focusTraversable="false" majorTickUnit="1.0" max="9.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" styleClass="time-slider" value="-1.0" />
+                  
+              
                   <HBox alignment="CENTER">
                      <children>
-                        <JFXButton fx:id="captureButton" focusTraversable="false" ripplerFill="#eaf213" text=" " textFill="#faac05">
-                           <graphic>
-                              <ImageView nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true">
-                                 <image>
-                                    <Image url="@../image/capture.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                           <tooltip>
-                              <Tooltip text="Capture" />
-                           </tooltip>
-                           <HBox.margin>
-                              <Insets bottom="4.0" left="2.0" right="5.0" top="2.0" />
-                           </HBox.margin>
-                        </JFXButton>
+                             <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" spacing="20">
+                                <HBox alignment="CENTER">
+                                        <JFXButton fx:id="captureButton" focusTraversable="false" ripplerFill="#eaf213" text=" " textFill="#faac05">
+                                       <graphic>
+                                          <ImageView nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true">
+                                             <image>
+                                                <Image url="@../image/capture.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <tooltip>
+                                          <Tooltip text="Capture" />
+                                       </tooltip>
+                                    </JFXButton>
+                                      <ImageView fx:id="IViewSelfie" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                      <image>
+                                          <Image url="https://www.tooltyp.com/wp-content/uploads/2014/10/1900x920-8-beneficios-de-usar-imagenes-en-nuestros-sitios-web.jpg" />
+                                      </image>
+                                        <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                      </ImageView>
+                                </HBox> 
+                                <!-- SEGUNDO BOTON-->
+                                 <HBox alignment="CENTER">
+                                        <JFXButton focusTraversable="false" ripplerFill="#eaf213" text=" " textFill="#faac05">
+                                       <graphic>
+                                          <ImageView nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true">
+                                             <image>
+                                                <Image url="@../image/capture.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <tooltip>
+                                          <Tooltip text="Capture" />
+                                       </tooltip>
+                                    </JFXButton>
+                                       <ImageView fx:id="IViewINEFrente" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                      <image>
+                                          <Image url="https://www.tooltyp.com/wp-content/uploads/2014/10/1900x920-8-beneficios-de-usar-imagenes-en-nuestros-sitios-web.jpg" />
+                                      </image>
+                                      <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                      </ImageView>
+                                      
+                                </HBox> 
+                                                                <!-- TERCER BOTON-->
+                                 <HBox alignment="CENTER">
+                                        <JFXButton focusTraversable="false" ripplerFill="#eaf213" text=" " textFill="#faac05">
+                                       <graphic>
+                                          <ImageView nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true">
+                                             <image>
+                                                <Image url="@../image/capture.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <font>
+                                          <Font size="14.0" />
+                                       </font>
+                                       <tooltip>
+                                          <Tooltip text="Capture" />
+                                       </tooltip>
+                                    </JFXButton>
+                                       <ImageView fx:id="IViewINEVuelta" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" >
+                                      <image>
+                                          <Image url="https://www.tooltyp.com/wp-content/uploads/2014/10/1900x920-8-beneficios-de-usar-imagenes-en-nuestros-sitios-web.jpg" />
+                                      </image>
+                                      <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                      </ImageView>
+                                </HBox> 
+                            </VBox>
+                        
                         <JFXButton fx:id="openImageViewer" ripplerFill="#e1da1b" text=" " visible="false">
                            <graphic>
                               <ImageView pickOnBounds="true" preserveRatio="true">
