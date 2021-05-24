@@ -23,7 +23,7 @@ public class VisualizarImagenes {
         this.imagen = imagen;
         ImageView imageView = new ImageView(imagen);
         HBox hbox = new HBox(imageView);
-
+        
         Scene scene = new Scene(hbox, 500, 500);
         stage.setScene(scene);
         stage.show();

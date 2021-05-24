@@ -34,6 +34,7 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import javax.swing.JOptionPane;
 import main.java.com.goxr3plus.xr3capture.application.CaptureWindow;
 import main.java.com.goxr3plus.xr3capture.application.Main;
 import main.java.com.goxr3plus.xr3capture.tools.ActionTool;
@@ -54,9 +55,11 @@ public class CaptureWindowController extends Stage {
     /** The main canvas. */
     @FXML
     private Canvas mainCanvas;
-
+    
     // -----------------------------
-
+    public BufferedImage[] imagesArray;
+    
+    public int numerodeimagen;
     /**
      * The Model of the CaptureWindow
      */
@@ -581,11 +584,13 @@ public class CaptureWindowController extends Stage {
     /**
      * Prepares the Window for the User.
      */
-    public void prepareForCapture() {
+    public void prepareForCapture(BufferedImage[] imagenes, int numeroDeImagen) {
 	show();
 	repaintCanvas();
 	CaptureWindow.stage.close();
 	settingsWindowController.close();
+        this.imagesArray = imagenes;
+        this.numerodeimagen = numeroDeImagen;
 	//if (settingsWindowController.getMarryTTSToggle().isSelected())
 	//  Main.textToSpeech.speak("Select an area of the screen dragging your mouse and then press Enter or Space");
     }
@@ -638,9 +643,9 @@ public class CaptureWindowController extends Stage {
 		return;
 
 	    this.image = image2;
-
 	    // Show the SaveDialog
-	    fileSaver.get().setInitialFileName("ScreenShot" + data.random.nextInt(50000));
+            imagesArray[numerodeimagen]=this.image;
+	    /*fileSaver.get().setInitialFileName("ScreenShot" + data.random.nextInt(50000));
 	    File file = fileSaver.get().showSaveDialog(CaptureWindowController.this);
 	    if (file == null)
 		repaintCanvas();
@@ -648,7 +653,10 @@ public class CaptureWindowController extends Stage {
 		filePath = file.getAbsolutePath();
 		reset();
 		start();
-	    }
+	    }*/
+            reset();
+            start();
+            mainWindowController.ponerImagen(imagesArray);
 	}
 
 	/**
@@ -660,11 +668,11 @@ public class CaptureWindowController extends Stage {
 	    close();
 
 	    //Was it seccussful?
-	    if (!getValue())
+	    /*if (!getValue())
 		ActionTool.showNotification("Error", "Failed to capture the Screen!", Duration.millis(2000), NotificationType.ERROR);
 	    else
 		ActionTool.showNotification("Successful Capturing", "Image is being saved at:\n" + filePath, Duration.millis(2000),
-			NotificationType.INFORMATION);
+			NotificationType.INFORMATION);*/
 	}
 
 	/* (non-Javadoc)
