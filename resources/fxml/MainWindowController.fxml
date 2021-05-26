@@ -17,16 +17,16 @@
 
 <StackPane fx:id="root" nodeOrientation="LEFT_TO_RIGHT" prefHeight="170.0" style="-fx-background-color: transparent;" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.goxr3plus.xr3capture.controllers.MainWindowController">
    <children>
-      <BorderPane style="-fx-background-radius: 15 0 0 30; -fx-background-color: black; -fx-border-radius: 13  0 0 28; -fx-border-width: 2; -fx-border-color: white; -fx-border-style: solid;">
+      <BorderPane style="-fx-background-radius: 15 0 0 30; -fx-background-color: white; -fx-border-radius: 13  0 0 28; -fx-border-width: 2; -fx-border-color: black; -fx-border-style: solid;">
          <top>
             <HBox spacing="5.0">
                <children>
-                  <JFXButton fx:id="more" prefHeight="27.0" prefWidth="81.0" ripplerFill="#2b8e9e" text="Settings" HBox.hgrow="ALWAYS">
+                  <JFXButton fx:id="more" prefHeight="27.0" prefWidth="81.0" ripplerFill="#2b8e9e" text="Ajustes" HBox.hgrow="ALWAYS">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXButton>
-                  <JFXButton fx:id="minimize" prefHeight="27.0" prefWidth="82.0" ripplerFill="#1f9dd1" text="Minimize" HBox.hgrow="ALWAYS">
+                  <JFXButton fx:id="minimize" prefHeight="27.0" prefWidth="82.0" ripplerFill="#1f9dd1" text="Minimizar" HBox.hgrow="ALWAYS">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
@@ -60,7 +60,7 @@
                     </HBox>
                 </children>
                 <children>
-                    <HBox alignment="CENTER">
+                    <HBox alignment="CENTER" spacing="10" >
                          <JFXButton fx:id="botonAnterior" focusTraversable="false" ripplerFill="#eaf213" text="Anterior" textFill="#faac05" visible="false"></JFXButton>
                          <JFXButton fx:id="botonSiguiente" focusTraversable="false" ripplerFill="#eaf213" text="Siguiente" textFill="#faac05" visible="false"></JFXButton>
                     </HBox>
@@ -69,18 +69,18 @@
                <children>
                   <JFXSlider fx:id="timeSlider" focusTraversable="false" majorTickUnit="1.0" max="9.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" styleClass="time-slider" value="-1.0" visible="false"  />
                   
-                  <HBox alignment="CENTER">
+                  <HBox alignment="CENTER" style="-fx-padding: 10 10 10 10;">
                      <children>
                              <VBox fx:id="contenedorScreenshot" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" spacing="20" visible="false">
-                                <HBox alignment="CENTER">
-                                        <JFXButton fx:id="captureButton" focusTraversable="false" ripplerFill="#eaf213" text=" " textFill="#faac05">
-                                       <graphic>
+                                <HBox alignment="CENTER" spacing="10" >
+                                        <JFXButton fx:id="captureButton" focusTraversable="false" ripplerFill="#eaf213" text="Selfie" textFill="#faac05" >
+                                       <!--<graphic>
                                           <ImageView nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true">
                                              <image>
                                                 <Image url="@../image/capture.png" />
                                              </image>
                                           </ImageView>
-                                       </graphic>
+                                       </graphic>-->
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
@@ -91,9 +91,9 @@
                                           <Tooltip text="Capture" />
                                        </tooltip>
                                     </JFXButton>
-                                      <ImageView fx:id="IViewSelfie" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                      <ImageView fx:id="IViewSelfie" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                                       <image>
-                                          <Image url="https://www.tooltyp.com/wp-content/uploads/2014/10/1900x920-8-beneficios-de-usar-imagenes-en-nuestros-sitios-web.jpg" />
+                                          <Image url="@../image/no-image.png" />
                                       </image>
                                         <cursor>
                                           <Cursor fx:constant="HAND" />
@@ -101,15 +101,15 @@
                                       </ImageView>
                                 </HBox> 
                                 <!-- SEGUNDO BOTON-->
-                                 <HBox alignment="CENTER">
-                                        <JFXButton fx:id="btnINEFrente" focusTraversable="false" ripplerFill="#eaf213" text=" " textFill="#faac05">
-                                       <graphic>
+                                 <HBox alignment="CENTER" spacing="10">
+                                        <JFXButton fx:id="btnINEFrente" focusTraversable="false" ripplerFill="#eaf213" text="INE Frente" textFill="#faac05">
+                                       <!--<graphic>
                                           <ImageView nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true">
                                              <image>
                                                 <Image url="@../image/capture.png" />
                                              </image>
                                           </ImageView>
-                                       </graphic>
+                                       </graphic>-->
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
@@ -120,9 +120,9 @@
                                           <Tooltip text="Capture" />
                                        </tooltip>
                                     </JFXButton>
-                                       <ImageView fx:id="IViewINEFrente" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                       <ImageView fx:id="IViewINEFrente" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                                       <image>
-                                          <Image url="https://www.tooltyp.com/wp-content/uploads/2014/10/1900x920-8-beneficios-de-usar-imagenes-en-nuestros-sitios-web.jpg" />
+                                          <Image url="@../image/no-image.png" />
                                       </image>
                                       <cursor>
                                           <Cursor fx:constant="HAND" />
@@ -131,15 +131,15 @@
                                       
                                 </HBox> 
                                                                 <!-- TERCER BOTON-->
-                                 <HBox alignment="CENTER">
-                                        <JFXButton fx:id="btnINEVuelta" focusTraversable="false" ripplerFill="#eaf213" text=" " textFill="#faac05">
-                                       <graphic>
+                                 <HBox alignment="CENTER" spacing="10" >
+                                        <JFXButton fx:id="btnINEVuelta" focusTraversable="false" ripplerFill="#eaf213" text="INE Vuelta" textFill="#faac05">
+                                       <!--<graphic>
                                           <ImageView nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true">
                                              <image>
                                                 <Image url="@../image/capture.png" />
                                              </image>
                                           </ImageView>
-                                       </graphic>
+                                       </graphic>-->
                                        <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
@@ -150,17 +150,17 @@
                                           <Tooltip text="Capture" />
                                        </tooltip>
                                     </JFXButton>
-                                       <ImageView fx:id="IViewINEVuelta" fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" >
+                                       <ImageView fx:id="IViewINEVuelta" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" >
                                       <image>
-                                          <Image url="https://www.tooltyp.com/wp-content/uploads/2014/10/1900x920-8-beneficios-de-usar-imagenes-en-nuestros-sitios-web.jpg" />
+                                          <Image url="@../image/no-image.png" />
                                       </image>
                                       <cursor>
                                           <Cursor fx:constant="HAND" />
                                        </cursor>
                                       </ImageView>
                                  </HBox>
-                                 <HBox alignment="CENTER">
-                                     <JFXButton fx:id="btnSubirImagen" ripplerFill="#e1da1b" text="Subir Imagen" visible="true">
+                                 <HBox alignment="CENTER" >
+                                     <JFXButton fx:id="btnSubirImagen" ripplerFill="#e1da1b" text="Subir Imagen" visible="true" alignment="CENTER" >
                                          <cursor>
                                             <Cursor fx:constant="HAND" />
                                          </cursor>

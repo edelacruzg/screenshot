@@ -21,8 +21,6 @@ public class ImageBase64 {
         String text = "";
         try {
             
-          //text = new String(Files.readAllBytes(Paths.get("C:\\repositorios\\screenshot\\resources\\txt\\fotoBase64.txt")));
-          //text = new String(Files.readAllBytes(getClass().getResourceAsStream("/txt/fotoBase64.txt")));
           text = new String(Files.readAllBytes(Paths.get(getClass().getResource("/txt/fotoBase64.txt").toURI())));
         } catch (IOException e) {
           e.printStackTrace();
@@ -31,14 +29,4 @@ public class ImageBase64 {
     return text;
         
     }
-    /*public void whenStoringInFileTooLongString_thenNoCompilationError() throws IOException {
-    FileInputStream fis = new FileInputStream("src/test/resources/stringtoolong.txt");
-    String stringTooLong;
-        stringTooLong = IOUtils.toString(fis, "UTF-8");
-    assertThat(stringTooLong).isNotEmpty();
-}
-
-    private Object assertThat(String stringTooLong) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }*/
 }

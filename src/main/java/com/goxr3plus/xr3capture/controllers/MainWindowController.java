@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXSlider;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.net.URISyntaxException;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -145,7 +146,7 @@ public class MainWindowController {
 	 * Will be called as soon as FXML file is loaded.
 	 */
 	@FXML
-	public void initialize() {
+	public void initialize() throws URISyntaxException {
 		
 		// more
 		more.setOnAction(a -> settingsWindowController.show());
@@ -154,7 +155,7 @@ public class MainWindowController {
 		minimize.setOnAction(a -> CaptureWindow.stage.setIconified(true));
 		
 		// exitButton
-		exitButton.setText("Close");
+		exitButton.setText("Cerrar");
 		exitButton.setOnAction(a -> {
 			CaptureWindow.stage.close();
 			//DataBase.saveDataBaseSettings(settingsWindowController);
@@ -241,6 +242,14 @@ public class MainWindowController {
                   IViewINEVuelta.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent event) -> {
                     new VisualizarImagenes(IViewINEVuelta.getImage());
                 });
+                captureButton.setMinHeight(50);
+                captureButton.setMinWidth(120);
+                btnINEFrente.setMinHeight(50);
+                btnINEFrente.setMinWidth(120);
+                btnINEVuelta.setMinHeight(50);
+                btnINEVuelta.setMinWidth(120);
+                btnSubirImagen.setMinHeight(30);
+                btnSubirImagen.setMinWidth(200);
 	}
 	
 	/**
