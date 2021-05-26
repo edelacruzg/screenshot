@@ -7,7 +7,9 @@ package main.java.com.goxr3plus.xr3capture.application;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import sun.misc.IOUtils;
 /**
@@ -15,10 +17,13 @@ import sun.misc.IOUtils;
  * @author mario
  */
 public class ImageBase64 {
-    public String readStringImage(){
+    public String readStringImage() throws URISyntaxException{
         String text = "";
         try {
-          text = new String(Files.readAllBytes(Paths.get("C:\\repositorio\\screenshot\\resources\\txt\\fotoBase64.txt")));
+            
+          //text = new String(Files.readAllBytes(Paths.get("C:\\repositorios\\screenshot\\resources\\txt\\fotoBase64.txt")));
+          //text = new String(Files.readAllBytes(getClass().getResourceAsStream("/txt/fotoBase64.txt")));
+          text = new String(Files.readAllBytes(Paths.get(getClass().getResource("/txt/fotoBase64.txt").toURI())));
         } catch (IOException e) {
           e.printStackTrace();
         }
