@@ -38,7 +38,7 @@ public class RESTClient {
     	} finally { if(client != null) client.close(); }
     }
      
-     public static ValidatingResponse consultaDocs(ValidatingRequest documents) throws RuntimeException {
+     public static ValidatingResponse validaFaceMatch(ValidatingRequest documents) throws RuntimeException {
     	Client client = null;
     	try {
     		client = ClientBuilder.newClient();
