@@ -27,6 +27,9 @@ import main.java.com.goxr3plus.xr3capture.application.CaptureWindow;
 import main.java.com.goxr3plus.xr3capture.application.ImageBase64;
 import main.java.com.goxr3plus.xr3capture.application.Main;
 import main.java.com.goxr3plus.xr3capture.application.VisualizarImagenes;
+import main.java.com.goxr3plus.xr3capture.model.rest.RESTClient;
+import main.java.com.goxr3plus.xr3capture.model.rest.models.CallDocumentsRequest;
+import main.java.com.goxr3plus.xr3capture.model.rest.models.CallDocumentsResponse;
 import sun.misc.BASE64Decoder;
 
 /**
@@ -207,6 +210,9 @@ public class MainWindowController {
 		// timeSlider
 		timeSlider.setOnScroll(s -> timeSlider.setValue(timeSlider.getValue() + ( s.getDeltaY() > 0 ? 1 : -1 )));
                 btnBuscarCliente.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent event) -> {
+                    CallDocumentsRequest req = new CallDocumentsRequest();
+                    req.setIdAsociado(txtIDFinsus.getText());
+                    CallDocumentsResponse cDoc = RESTClient.consultaDocs(req);
                     contenedorFotos.setVisible(true);
                     contenedorScreenshot.setVisible(true);
                     botonAnterior.setVisible(true);
