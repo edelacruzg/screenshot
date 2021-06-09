@@ -17,7 +17,7 @@
 
 <StackPane fx:id="root" nodeOrientation="LEFT_TO_RIGHT" prefHeight="170.0" style="-fx-background-color: transparent;" stylesheets="@../css/application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.com.goxr3plus.xr3capture.controllers.MainWindowController">
    <children>
-      <BorderPane style="-fx-background-radius: 15 0 0 30; -fx-background-color: white; -fx-border-radius: 13  0 0 28; -fx-border-width: 2; -fx-border-color: black; -fx-border-style: solid;">
+      <BorderPane style="-fx-background-radius: 15 0 0 30; -fx-background-color: rgba(100, 100, 100, .6); -fx-border-radius: 13  0 0 28; -fx-border-width: 2; -fx-border-color: black; -fx-border-style: solid;">
          <top>
             <HBox spacing="5.0">
                <children>
@@ -51,7 +51,7 @@
                     <HBox fx:id="contenedorFotos" alignment="CENTER" visible="false" >
                         <ImageView fx:id="fotosCliente" fitHeight="300.0" fitWidth="300.0" pickOnBounds="true" preserveRatio="true">
                             <image>
-                                <Image url="https://www.tooltyp.com/wp-content/uploads/2014/10/1900x920-8-beneficios-de-usar-imagenes-en-nuestros-sitios-web.jpg" />
+                                
                             </image>
                         </ImageView>
                         <padding>
@@ -91,7 +91,7 @@
                                           <Tooltip text="Capture" />
                                        </tooltip>
                                     </JFXButton>
-                                      <ImageView fx:id="IViewSelfie" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                                      <ImageView fx:id="IViewSelfie" fitHeight="100.0" fitWidth="100.0">
                                       <image>
                                           <Image url="@../image/no-image.png" />
                                       </image>
@@ -160,7 +160,7 @@
                                       </ImageView>
                                  </HBox>
                                  <HBox alignment="CENTER" >
-                                     <JFXButton fx:id="btnSubirImagen" ripplerFill="#e1da1b" text="Subir Imagen" visible="true" alignment="CENTER" >
+                                     <JFXButton fx:id="btnSubirImagen" ripplerFill="#e1da1b" text="Validar Imagen" visible="true" alignment="CENTER" >
                                          <cursor>
                                             <Cursor fx:constant="HAND" />
                                          </cursor>

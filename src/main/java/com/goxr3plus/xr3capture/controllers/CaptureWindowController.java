@@ -663,8 +663,13 @@ public class CaptureWindowController extends Stage {
 	 * Service has been done.
 	 */
 	private void done() {
-
 		CaptureWindow.stage.show();
+                data.mouseXPressed = 0;
+                data.mouseYPressed = 0;
+                data.mouseXNow = 0;
+                data.mouseYNow = 0;
+                repaintCanvas();
+
 	    close();
 
 	    //Was it seccussful?
