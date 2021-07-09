@@ -3,12 +3,12 @@
  */
 package main.java.com.goxr3plus.xr3capture.controllers;
 
-import com.jfoenix.controls.JFXSlider;
-import com.jfoenix.controls.JFXToggleButton;
 
 import javafx.fxml.FXML;
 import javafx.geometry.NodeOrientation;
 import javafx.scene.Scene;
+import javafx.scene.control.Slider;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -26,15 +26,15 @@ public class SettingsWindowController extends Stage {
 	
 	/** The marrytts toggle. */
 	@FXML
-	private JFXToggleButton marryttsToggle;
+	private ToggleButton marryttsToggle;
 	
 	/** The orientation. */
 	@FXML
-	private JFXToggleButton orientation;
+	private ToggleButton orientation;
 	
 	/** The precision slider. */
 	@FXML
-	private JFXSlider precisionSlider;
+	private Slider precisionSlider;
 	
 	/** The main window controller. */
 	// --------------------
@@ -98,14 +98,14 @@ public class SettingsWindowController extends Stage {
 	 *
 	 * @return The precisionSlider
 	 */
-	public JFXSlider getPrecisionSlider() {
+	public Slider getPrecisionSlider() {
 		return precisionSlider;
 	}
 	
 	/**
 	 * @return the orientation
 	 */
-	public JFXToggleButton getOrientation() {
+	public ToggleButton getOrientation() {
 		return orientation;
 	}
 	
@@ -115,7 +115,7 @@ public class SettingsWindowController extends Stage {
 	 * @return The toggle which is for enabling/disabling text to speech
 	 *         recognition
 	 */
-	public JFXToggleButton getMarryTTSToggle() {
+	public ToggleButton getMarryTTSToggle() {
 		return marryttsToggle;
 	}
 	
@@ -134,21 +134,21 @@ public class SettingsWindowController extends Stage {
 	/**
 	 * @param precisionSlider the precisionSlider to set
 	 */
-	public void setPrecisionSlider(JFXSlider precisionSlider) {
+	public void setPrecisionSlider(Slider precisionSlider) {
 		this.precisionSlider = precisionSlider;
 	}
 	
 	/**
 	 * @param orientation the orientation to set
 	 */
-	public void setOrientation(JFXToggleButton orientation) {
+	public void setOrientation(ToggleButton orientation) {
 		this.orientation = orientation;
 	}
 	
 	/**
 	 * @param marryttsToggle the marryttsToggle to set
 	 */
-	public void setMarryttsToggle(JFXToggleButton marryttsToggle) {
+	public void setMarryttsToggle(ToggleButton marryttsToggle) {
 		this.marryttsToggle = marryttsToggle;
 	}
 	

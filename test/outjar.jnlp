@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="outjar.jnlp">
+  <information>
+    <title>outjar</title>
+    <vendor>Unknown</vendor>
+    <description>outjar</description>
+    <offline-allowed/>
+  </information>
+  <resources>
+    <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
+    <jar href=".\XR3Capture-3.12-sources.jar" size="137405" download="null" />
+    <jar href=".\XR3Capture-3.12.jar" size="156952" download="null" />
+    <jar href=".\XR3Capture_lib\aopalliance-repackaged-2.4.0-b10.jar" size="14765" download="null" />
+    <jar href=".\XR3Capture_lib\controlsfx-8.40.14.jar" size="1215643" download="null" />
+    <jar href=".\XR3Capture_lib\hk2-api-2.4.0-b10.jar" size="182424" download="null" />
+    <jar href=".\XR3Capture_lib\hk2-locator-2.4.0-b10.jar" size="171338" download="null" />
+    <jar href=".\XR3Capture_lib\hk2-utils-2.4.0-b10.jar" size="95316" download="null" />
+    <jar href=".\XR3Capture_lib\jackson-annotations-2.12.2.jar" size="75701" download="null" />
+    <jar href=".\XR3Capture_lib\jackson-core-2.12.2.jar" size="365219" download="null" />
+    <jar href=".\XR3Capture_lib\jackson-databind-2.12.2.jar" size="1515271" download="null" />
+    <jar href=".\XR3Capture_lib\jackson-module-jaxb-annotations-2.12.2.jar" size="36571" download="null" />
+    <jar href=".\XR3Capture_lib\jakarta.activation-api-1.2.1.jar" size="44399" download="null" />
+    <jar href=".\XR3Capture_lib\jakarta.ws.rs-api-2.1.6.jar" size="140376" download="null" />
+    <jar href=".\XR3Capture_lib\jakarta.xml.bind-api-2.3.2.jar" size="115498" download="null" />
+    <jar href=".\XR3Capture_lib\javassist-3.18.1-GA.jar" size="714194" download="null" />
+    <jar href=".\XR3Capture_lib\javax.annotation-api-1.2.jar" size="26366" download="null" />
+    <jar href=".\XR3Capture_lib\javax.inject-2.4.0-b10.jar" size="5948" download="null" />
+    <jar href=".\XR3Capture_lib\javax.ws.rs-api-2.0.1.jar" size="115534" download="null" />
+    <jar href=".\XR3Capture_lib\jersey-client-2.17.jar" size="156027" download="null" />
+    <jar href=".\XR3Capture_lib\jersey-common-2.17.jar" size="676868" download="null" />
+    <jar href=".\XR3Capture_lib\jersey-entity-filtering-2.34.jar" size="84008" download="null" />
+    <jar href=".\XR3Capture_lib\jersey-guava-2.17.jar" size="964529" download="null" />
+    <jar href=".\XR3Capture_lib\jersey-media-jaxb-2.17.jar" size="71042" download="null" />
+    <jar href=".\XR3Capture_lib\jersey-media-json-jackson-2.34.jar" size="75890" download="null" />
+    <jar href=".\XR3Capture_lib\jfoenix-1.10.0.jar" size="2414671" download="null" />
+    <jar href=".\XR3Capture_lib\mysql-connector-java-8.0.15.jar" size="2134905" download="null" />
+    <jar href=".\XR3Capture_lib\osgi-resource-locator-1.0.1.jar" size="20235" download="null" />
+    <jar href=".\XR3Capture_lib\protobuf-java-3.6.1.jar" size="1421323" download="null" />
+  </resources>
+  <jfx:javafx-desc  width="0" height="0" main-class="main.java.com.goxr3plus.xr3capture.application.Main"  name="outjar" />
+  <update check="background"/>
+</jnlp>

@@ -1,7 +1,6 @@
 package main.java.com.goxr3plus.xr3capture.controllers;
 
-import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXSlider;
+
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -16,6 +15,7 @@ import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
@@ -38,6 +38,11 @@ import main.java.com.goxr3plus.xr3capture.model.rest.models.CallDocumentsRespons
 import main.java.com.goxr3plus.xr3capture.model.rest.models.ValidatingRequest;
 import main.java.com.goxr3plus.xr3capture.model.rest.models.ValidatingResponse;
 import sun.misc.BASE64Decoder;
+import java.util.Base64;
+import javafx.application.Platform;
+import main.java.com.goxr3plus.xr3capture.application.PantallaDeCarga;
+import main.java.com.goxr3plus.xr3capture.application.Respuesta;
+import main.java.com.goxr3plus.xr3capture.database.DataBaseController;
 
 /**
  * The Scene of the primary window of the application.
@@ -52,27 +57,27 @@ public class MainWindowController {
 	
 	/** The more. */
 	@FXML
-	private JFXButton more;
+	private Button more;
 	
 	/** The minimize. */
 	@FXML
-	private JFXButton minimize;
+	private Button minimize;
 	
 	/** The exit button. */
 	@FXML
-	private JFXButton exitButton;
+	private Button exitButton;
 	
 	/** The time slider. */
 	@FXML
-	private JFXSlider timeSlider;
+	private Slider timeSlider;
 	
 	/** The capture button. */
 	@FXML
-	private JFXButton captureButton;
+	private Button captureButton;
 	
 	/** The open image viewer. */
 	@FXML
-	private JFXButton openImageViewer;
+	private Button openImageViewer;
 	
 	/** The region. */
 	@FXML
@@ -86,16 +91,16 @@ public class MainWindowController {
         private ImageView fotosCliente;
         
         @FXML
-	private JFXButton botonSiguiente;
+	private Button botonSiguiente;
         
         @FXML
-	private JFXButton botonAnterior;
+	private Button botonAnterior;
         
         @FXML
-	private JFXButton btnINEFrente;
+	private Button btnINEFrente;
         
         @FXML
-	private JFXButton btnINEVuelta;
+	private Button btnINEVuelta;
         
         @FXML
         private ImageView IViewSelfie;
@@ -105,12 +110,15 @@ public class MainWindowController {
          
         @FXML
         private ImageView IViewINEVuelta;
-	
-        @FXML
-        private JFXButton btnBuscarCliente;
         
         @FXML
-        private JFXButton btnSubirImagen;
+        private HBox fotoCargando;
+	
+        @FXML
+        private Button btnBuscarCliente;
+        
+        @FXML
+        private Button btnSubirImagen;
         
         @FXML
         private TextField txtIDFinsus;
@@ -120,6 +128,9 @@ public class MainWindowController {
         
         @FXML
         private VBox contenedorScreenshot;
+        
+        @FXML
+        private VBox contenedorPrincipal;
 	// --------------------------------------------
 	BufferedImage[] imagenesArray = new BufferedImage[3];
 	/** The image viewer thread. */
@@ -136,6 +147,7 @@ public class MainWindowController {
         
         private String[] imagenesCliente = new String[3];
         private int posicionImagen = 0;
+        private final PantallaDeCarga pantalla = new PantallaDeCarga();
 	
 	/**
 	 * Add the needed references from the other controllers.
@@ -157,7 +169,6 @@ public class MainWindowController {
 	 */
 	@FXML
 	public void initialize() throws URISyntaxException {
-		
 		// more
 		more.setOnAction(a -> settingsWindowController.show());
 		
@@ -232,6 +243,7 @@ public class MainWindowController {
                             imagenesCliente[2]=cDoc.getIneBack();
                             BufferedImage imagenDecode = decodeToImage(imagenesCliente[0]);
                             fotosCliente.setImage(SwingFXUtils.toFXImage(imagenDecode, null));
+                            new DataBaseController().verificarExistencia(idAsociado.trim());
                         }else{
                             Alert alert = new Alert(AlertType.INFORMATION);
                             alert.setTitle("INFORMACIÓN");
@@ -269,18 +281,36 @@ public class MainWindowController {
                     
                 });
                 btnSubirImagen.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent event) -> {
-                    try {
-                        String[] fotosBase64 = ImageBase64.convertImageToBase64(imagenesArray);
-                        ValidatingRequest vr = new ValidatingRequest();
-                        vr.setIdAsociado(txtIDFinsus.getText());
-                        vr.setSelfie(fotosBase64[0]);
-                        vr.setIneFront(fotosBase64[1]);
-                        vr.setIneBack(fotosBase64[2]);
-                        ValidatingResponse response = RESTClient.validaFaceMatch(vr);
-                             
-                    } catch (IOException ex) {
-                        Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                       Thread thread = new Thread(() -> {
+                            try {
+                                Platform.runLater(() -> {pantalla.stage.show(); CaptureWindow.stage.close();});
+                                Thread.sleep(1000);
+                                Platform.runLater(() -> {  
+                                    boolean containNull = true;
+                                    for(int i = 0; i<imagenesArray.length; i++) {
+                                            if(imagenesArray[i] != null) {
+                                                    containNull = false;
+                                                    break;
+                                            }
+                                    }
+                                    if(!containNull) {
+                                        validarImagenes();
+                                    }else{
+                                        Alert alert = new Alert(AlertType.ERROR);
+                                        alert.setTitle("ERROR");
+                                        alert.setHeaderText("AUN NO REALIZA TODAS LAS CAPTURAS");
+                                        alert.showAndWait();
+                                        pantalla.stage.close(); CaptureWindow.stage.show();
+                                    }
+                                     
+                                });
+                                //Platform.runLater(() -> { new Respuesta().stage.show(); });
+                            } catch (Exception exc) {
+                                // should not be able to get here...
+                                exc.printStackTrace();
+                            }
+                        });
+                        thread.start();
                 });
                 captureButton.setMinHeight(50);
                 captureButton.setMinWidth(120);
@@ -300,7 +330,11 @@ public class MainWindowController {
                 btnSubirImagen.setMaxWidth(200);
                 IViewSelfie.minHeight(300);
                 IViewSelfie.minWidth(300);
-               txtIDFinsus.setText("100-10-400");
+                IViewINEFrente.minHeight(300);
+                IViewINEFrente.minWidth(300);
+                IViewINEVuelta.minHeight(300);
+                IViewINEVuelta.minWidth(300);
+               //txtIDFinsus.setText("100-10-400");
 	}
 	
 	/**
@@ -326,8 +360,12 @@ public class MainWindowController {
         BufferedImage image = null;
         byte[] imageByte;
         try {
-            BASE64Decoder decoder = new BASE64Decoder();
+            /*BASE64Decoder decoder = new BASE64Decoder();
             imageByte = decoder.decodeBuffer(imageString);
+            ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
+            image = ImageIO.read(bis);
+            bis.close();*/
+            imageByte = Base64.getDecoder().decode(imageString);
             ByteArrayInputStream bis = new ByteArrayInputStream(imageByte);
             image = ImageIO.read(bis);
             bis.close();
@@ -369,4 +407,150 @@ public class MainWindowController {
                 
             }
         }
+        private void ocultarPanelPrincipal(){
+            IViewINEFrente.setVisible(false);
+            IViewINEFrente.setManaged(false);
+            IViewINEVuelta.setVisible(false);
+            IViewINEVuelta.setManaged(false);
+            IViewSelfie.setVisible(false);
+            IViewSelfie.setManaged(false);
+            btnINEFrente.setVisible(false);
+            btnINEFrente.setManaged(false);
+            btnINEVuelta.setVisible(false);
+            btnINEVuelta.setManaged(false);
+            captureButton.setVisible(false);
+            captureButton.setManaged(false);
+            txtIDFinsus.setVisible(false);
+            txtIDFinsus.setManaged(false);
+            btnBuscarCliente.setVisible(false);
+            btnBuscarCliente.setManaged(false);
+            contenedorFotos.setVisible(false);
+            contenedorFotos.setManaged(false);
+            botonAnterior.setVisible(false);
+            botonAnterior.setManaged(false);
+            botonSiguiente.setVisible(false);
+            botonSiguiente.setManaged(false);
+            btnSubirImagen.setVisible(false);
+            btnSubirImagen.setVisible(false);
+            contenedorFotos.setVisible(false);
+            contenedorScreenshot.setVisible(false);
+            contenedorFotos.setManaged(false);
+            contenedorScreenshot.setManaged(false);
+   
+            
+        }
+        private void mostrarPanelPrincipal(){
+            IViewINEFrente.setVisible(true);
+            IViewINEFrente.setManaged(true);
+            IViewINEVuelta.setVisible(true);
+            IViewINEVuelta.setManaged(true);
+            IViewSelfie.setVisible(true);
+            IViewSelfie.setManaged(true);
+            btnINEFrente.setVisible(true);
+            btnINEFrente.setManaged(true);
+            btnINEVuelta.setVisible(true);
+            btnINEVuelta.setManaged(true);
+            captureButton.setVisible(true);
+            captureButton.setManaged(true);
+            txtIDFinsus.setVisible(true);
+            txtIDFinsus.setManaged(true);
+            btnBuscarCliente.setVisible(true);
+            btnBuscarCliente.setManaged(true);
+            contenedorFotos.setVisible(true);
+            contenedorFotos.setManaged(true);
+            botonAnterior.setVisible(true);
+            botonAnterior.setManaged(true);
+            botonSiguiente.setVisible(true);
+            botonSiguiente.setManaged(true);
+            btnSubirImagen.setVisible(true);
+            btnSubirImagen.setVisible(true);
+            contenedorFotos.setVisible(true);
+            contenedorScreenshot.setVisible(true);
+            contenedorFotos.setManaged(true);
+            contenedorScreenshot.setManaged(true);
+   
+            
+        }
+        private void validarImagenes(){
+                        try {
+                            int numIntentos = new DataBaseController().verificarIntentos(txtIDFinsus.getText().trim());
+                        if(numIntentos <= 5){//if(false){
+                            
+                            String[] fotosBase64 = ImageBase64.convertImageToBase64(imagenesArray);
+                            ValidatingRequest vr = new ValidatingRequest();
+                            vr.setIdAsociado(txtIDFinsus.getText());
+                            vr.setSelfie(fotosBase64[0]);
+                            vr.setIneFront(fotosBase64[1]);
+                            vr.setIneBack(fotosBase64[2]);
+                            ValidatingResponse response = RESTClient.validaFaceMatch(vr);
+                            pantalla.stage.close();
+                        if(response.getStatusCode().equals("000")){
+                            
+                            Respuesta resp = new Respuesta(this);
+                            resp.respuestaController.setIdAsociado(txtIDFinsus.getText().trim());
+                            resp.respuestaController.setTextoRespuesta(response.getMessageCode());
+                            resp.respuestaController.setImagenRespuesta(response.getStatusCode());
+                            resp.respuestaController.ocultarBotones(response.getStatusCode());
+                            resp.stage.showAndWait();
+                            /*Alert alert = new Alert(AlertType.INFORMATION);
+                            alert.setTitle("EXITO");
+                            alert.setHeaderText("Mensaje "+response.getMessageCode());
+                            alert.showAndWait();*/
+                            
+                        }else{
+                            /*Alert alert = new Alert(AlertType.ERROR);
+                            alert.setTitle("ERROR");
+                            alert.setHeaderText("Mensaje "+response.getMessageCode());
+                            alert.showAndWait();*/
+
+                            int intentos = 5 - numIntentos;
+                            Respuesta resp = new Respuesta(this);
+                            resp.respuestaController.setIdAsociado(txtIDFinsus.getText().trim());
+                            resp.respuestaController.setTextoRespuesta(response.getMessageCode()+ " INTENTOS RESTANTES: "+intentos);
+                            resp.respuestaController.setImagenRespuesta(response.getStatusCode());
+                            resp.respuestaController.ocultarBotones(response.getStatusCode());
+                            resp.stage.showAndWait();
+                        }       
+                        }else{
+                            /*Alert alert = new Alert(AlertType.ERROR);
+                            alert.setTitle("ERROR");
+                            alert.setHeaderText("Se ha exedido el numero de intentos");
+                            alert.showAndWait();*/
+                            
+                            int intentos = 5 - numIntentos;
+                            Respuesta resp = new Respuesta(this);
+                            resp.respuestaController.setIdAsociado(txtIDFinsus.getText().trim());
+                            resp.respuestaController.setTextoRespuesta("SE HA EXCEDIDO EL NUMERO DE INTENTOS");
+                            resp.respuestaController.setImagenRespuesta("");
+                            resp.respuestaController.ocultarBotones("");
+                            resp.stage.showAndWait();
+                        }
+                        } catch (IOException ex) {
+                            Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+                            ex.printStackTrace();
+                        }
+                       
+                        CaptureWindow.stage.show();
+        }
+        public void rechazarExpediente(){
+             contenedorFotos.setVisible(false);
+             contenedorScreenshot.setVisible(false);
+             botonAnterior.setVisible(false);
+             botonSiguiente.setVisible(false);
+             imagenesCliente = new String[3];
+             txtIDFinsus.setText("");
+        }
+        public void reailzarNuevoFaceMatch(){
+            for(int c = 0; c < imagenesArray.length; c++){
+                try {
+                    imagenesArray[c] = ImageIO.read(getClass().getResource("/image/no-image.png"));
+                } catch (IOException ex) {
+                    Logger.getLogger(MainWindowController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            ponerImagen(imagenesArray);
+            imagenesArray =  new BufferedImage[3];
+            
+        }
 }
+
