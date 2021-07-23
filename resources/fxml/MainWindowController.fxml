@@ -18,7 +18,7 @@
    <children>
       <BorderPane style="-fx-background-radius: 15 0 0 30; -fx-background-color: rgba(100, 100, 100, .6); -fx-border-radius: 13  0 0 28; -fx-border-width: 2; -fx-border-color: black; -fx-border-style: solid;">
          <top>
-            <HBox spacing="5.0">
+            <HBox spacing="5.0" >
                <children>
                   <javafx.scene.control.Button  fx:id="more" prefHeight="27.0" prefWidth="81.0"  text="Ajustes" HBox.hgrow="ALWAYS">
                      <cursor>
@@ -58,13 +58,6 @@
                         <padding>
                             <Insets top="5" bottom="5"/>
                         </padding>
-                    </HBox>
-                    <HBox fx:id="fotoCargando" alignment="CENTER" visible="false" managed="false" >
-                      <ImageView  fitHeight="200.0" fitWidth="200.0"   pickOnBounds="true" preserveRatio="true" >
-                            <image>
-                                <Image url="@../image/cargando.gif" />
-                            </image>
-                        </ImageView>
                     </HBox>
                 </children>
                 <children>

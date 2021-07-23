@@ -40,6 +40,8 @@ import main.java.com.goxr3plus.xr3capture.model.rest.models.ValidatingResponse;
 import sun.misc.BASE64Decoder;
 import java.util.Base64;
 import javafx.application.Platform;
+import javafx.geometry.Rectangle2D;
+import javafx.stage.Screen;
 import main.java.com.goxr3plus.xr3capture.application.PantallaDeCarga;
 import main.java.com.goxr3plus.xr3capture.application.Respuesta;
 import main.java.com.goxr3plus.xr3capture.database.DataBaseController;
@@ -169,6 +171,8 @@ public class MainWindowController {
 	 */
 	@FXML
 	public void initialize() throws URISyntaxException {
+                Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
+                
 		// more
 		more.setOnAction(a -> settingsWindowController.show());
 		
@@ -228,6 +232,7 @@ public class MainWindowController {
 		// timeSlider
 		timeSlider.setOnScroll(s -> timeSlider.setValue(timeSlider.getValue() + ( s.getDeltaY() > 0 ? 1 : -1 )));
                 btnBuscarCliente.addEventHandler(MouseEvent.MOUSE_CLICKED, (MouseEvent event) -> {
+                    nuevaBusqueda();
                     CallDocumentsRequest req = new CallDocumentsRequest();
                     String idAsociado = txtIDFinsus.getText();
                     if(!idAsociado.trim().isEmpty()){
@@ -335,6 +340,9 @@ public class MainWindowController {
                 IViewINEVuelta.minHeight(300);
                 IViewINEVuelta.minWidth(300);
                //txtIDFinsus.setText("100-10-400");
+               if(primaryScreenBounds.getHeight() < 1000){
+                    ajustarVentana();
+                }
 	}
 	
 	/**
@@ -539,6 +547,15 @@ public class MainWindowController {
              botonSiguiente.setVisible(false);
              imagenesCliente = new String[3];
              txtIDFinsus.setText("");
+             reailzarNuevoFaceMatch();
+        }
+        public void nuevaBusqueda(){
+             contenedorFotos.setVisible(false);
+             contenedorScreenshot.setVisible(false);
+             botonAnterior.setVisible(false);
+             botonSiguiente.setVisible(false);
+             imagenesCliente = new String[3];
+             reailzarNuevoFaceMatch();
         }
         public void reailzarNuevoFaceMatch(){
             for(int c = 0; c < imagenesArray.length; c++){
@@ -551,6 +568,23 @@ public class MainWindowController {
             ponerImagen(imagenesArray);
             imagenesArray =  new BufferedImage[3];
             
+        }
+        private void ajustarVentana(){
+            root.setMaxHeight(700);
+            root.setMinHeight(700);
+            contenedorFotos.setMaxHeight(200);
+            contenedorFotos.setMinHeight(200);
+            contenedorScreenshot.setMaxHeight(100);
+            contenedorScreenshot.setMinHeight(100);
+            fotosCliente.setFitHeight(200);
+            fotosCliente.setFitWidth(200);
+            IViewSelfie.setFitHeight(80);
+            IViewSelfie.setFitWidth(80);
+            IViewINEVuelta.setFitHeight(80);
+            IViewINEVuelta.setFitWidth(80);
+            IViewINEFrente.setFitHeight(80);
+            IViewINEFrente.setFitWidth(80);
+                
         }
 }
 
