@@ -13,13 +13,20 @@ import java.sql.DriverManager;
  */
 public class DataBaseConection {
     public Connection databaseLink;
-    
+    //PRUEBAS
+    /*private final String databaseName = "";
+    private final String databaseUser = "";
+    private final String databasePassword = "";
+    private final String databaseHost = "";*/
+    //PRODUCCION
+    private final String databaseName = "";
+    private final String databaseUser = "";
+    private final String databasePassword = "";
+    private final String databaseHost = "";
+
     public Connection getConnection(){
-        String databaseName = "TEMP_BACK";
-        String databaseUser = "GITUser";
-        String databasePassword = "G17U53r_25$";
-        String databaseHost = "74.208.84.208:3306/";
-        String url = "jdbc:mysql://" + databaseHost + databaseName;
+        
+        String url = "jdbc:mysql://" + databaseHost + databaseName +"?serverTimezone=UTC";
         
         try{
             Class.forName("com.mysql.jdbc.Driver");

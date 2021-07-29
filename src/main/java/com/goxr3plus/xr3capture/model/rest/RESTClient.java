@@ -23,7 +23,8 @@ import main.java.com.goxr3plus.xr3capture.model.rest.models.ValidatingResponse;
  * @author edelacruz
  */
 public class RESTClient {
-    private static final String WS_URI = "https://pruebas.dimmerapp.com/Finsus/videocall/";
+    //private static final String WS_URI = "https://pruebas.dimmerapp.com/Finsus/videocall/";
+    private static final String WS_URI = "https://www.dimmerapp.com/Finsus/videocall/";
     
      public static CallDocumentsResponse consultaDocs(CallDocumentsRequest idAsociado) throws RuntimeException {
     	Client client = null;
